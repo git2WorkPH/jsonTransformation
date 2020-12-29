@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import * as path from 'path'
 import { Json2JsonTransformer } from "./json-to-json-transformer";
 import { NodeJsonTransform } from "./node-json-transform";
 
@@ -8,12 +9,12 @@ type Store = {
 }
 
 export type BaseMenu = {
-    store:Store,categories:object[]
+    store:Store,categories:object[],products:object[]
 }
 
 const basedInput : BaseMenu = 
     {
-      store:{
+    store:{
         id:1,
         name:'World Square',
         phoneNumber:'(02) 9191 0909',
@@ -22,11 +23,17 @@ const basedInput : BaseMenu =
             postCode:2000,
             hasCoordinate:false
         },
-            start_time:'10:30',
-            end_time:'21:55',
-        },
+        start_time:'10:30',
+        end_time:'21:55',
+    },
     categories:[{id: 37, title:'Hard Tacos' },{id:38,title:'Soft Tacos'}],
+    products:[{id:877,title:'One Hard Taco',categoryIds:[37],fillings:[]}],
     }
+
+    
+if(!fs.existsSync('./output')){
+    fs.mkdirSync('./output')
+}
 
 fs.writeFile('./output/nodeJsonTransform.json',JSON.stringify( NodeJsonTransform(basedInput),null,3),(err)=>{ if(err) console.log(err) } )  
 fs.writeFile('./output/json2JsonTransform.json',JSON.stringify( Json2JsonTransformer(basedInput),null,3),(err)=>{if(err) console.log(err)} )  
