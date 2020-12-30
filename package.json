@@ -13,8 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/lodash": "^4.14.166",
     "express": "^4.17.1",
     "json-to-json-transformer": "^1.1.0",
+    "lodash": "^4.17.20",
     "node-json-transform": "^1.1.1"
   },
   "devDependencies": {
